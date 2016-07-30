@@ -1,189 +1,322 @@
 //
-//  NSString+Koolistov.m
-//  Koolistov
+//  NSString+HTML.m
+//  MWFeedParser
 //
-//  Created by Johan Kool on 13-11-09.
-//  Copyright 2009-2011 Koolistov Pte. Ltd. All rights reserved.
+//  Copyright (c) 2010 Michael Waterfall
 //
-//  Redistribution and use in source and binary forms, with or without modification, are 
-//  permitted provided that the following conditions are met:
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
 //
-//  * Redistributions of source code must retain the above copyright notice, this list of 
-//    conditions and the following disclaimer.
-//  * Neither the name of KOOLISTOV PTE. LTD. nor the names of its contributors may be used to 
-//    endorse or promote products derived from this software without specific prior written 
-//    permission.
+//  1. The above copyright notice and this permission notice shall be included
+//     in all copies or substantial portions of the Software.
 //
-//  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY 
-//  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
-//  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL 
-//  THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-//  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
-//  OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
-//  HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
-//  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
-//  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//  2. This Software cannot be used to archive or collect data such as (but not
+//     limited to) that of events, news, experiences and activities, for the
+//     purpose of any concept relating to diary/journal keeping.
 //
-
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//  THE SOFTWARE.
+//
 
 #import "NSString+HTML.h"
+#import "GTMNSString+HTML.h"
 
 @implementation NSString (HTML)
 
-// Method based on code obtained from:
-// http://www.thinkmac.co.uk/blog/2005/05/removing-entities-from-html-in-cocoa.html
-//
+#pragma mark - Instance Methods
 
-
-- (NSString *)ti_decodeHTMLCharacterEntities {
-    if ([self rangeOfString:@"&"].location == NSNotFound) {
-        return self;
-    } else {
-        NSMutableString *escaped = [NSMutableString stringWithString:self];
-        NSArray *codes = [NSArray arrayWithObjects:
-                          @"&nbsp;", @"&iexcl;", @"&cent;", @"&pound;", @"&curren;", @"&yen;", @"&brvbar;",
-                          @"&sect;", @"&uml;", @"&copy;", @"&ordf;", @"&laquo;", @"&not;", @"&shy;", @"&reg;",
-                          @"&macr;", @"&deg;", @"&plusmn;", @"&sup2;", @"&sup3;", @"&acute;", @"&micro;",
-                          @"&para;", @"&middot;", @"&cedil;", @"&sup1;", @"&ordm;", @"&raquo;", @"&frac14;",
-                          @"&frac12;", @"&frac34;", @"&iquest;", @"&Agrave;", @"&Aacute;", @"&Acirc;",
-                          @"&Atilde;", @"&Auml;", @"&Aring;", @"&AElig;", @"&Ccedil;", @"&Egrave;",
-                          @"&Eacute;", @"&Ecirc;", @"&Euml;", @"&Igrave;", @"&Iacute;", @"&Icirc;", @"&Iuml;",
-                          @"&ETH;", @"&Ntilde;", @"&Ograve;", @"&Oacute;", @"&Ocirc;", @"&Otilde;", @"&Ouml;",
-                          @"&times;", @"&Oslash;", @"&Ugrave;", @"&Uacute;", @"&Ucirc;", @"&Uuml;", @"&Yacute;",
-                          @"&THORN;", @"&szlig;", @"&agrave;", @"&aacute;", @"&acirc;", @"&atilde;", @"&auml;",
-                          @"&aring;", @"&aelig;", @"&ccedil;", @"&egrave;", @"&eacute;", @"&ecirc;", @"&euml;",
-                          @"&igrave;", @"&iacute;", @"&icirc;", @"&iuml;", @"&eth;", @"&ntilde;", @"&ograve;",
-                          @"&oacute;", @"&ocirc;", @"&otilde;", @"&ouml;", @"&divide;", @"&oslash;", @"&ugrave;",
-                          @"&uacute;", @"&ucirc;", @"&uuml;", @"&yacute;", @"&thorn;", @"&yuml;", nil];
-
-        NSUInteger i, count = [codes count];
-
-        // Html
-        for (i = 0; i < count; i++) {
-            NSRange range = [self rangeOfString:[codes objectAtIndex:i]];
-            if (range.location != NSNotFound) {
-                [escaped replaceOccurrencesOfString:[codes objectAtIndex:i]
-                                         withString:[NSString stringWithFormat:@"%C", (unsigned short) (160 + i)]
-                                            options:NSLiteralSearch
-                                              range:NSMakeRange(0, [escaped length])];
+- (NSString *)stringByConvertingHTMLToPlainText {
+    @autoreleasepool {
+        
+        // Character sets
+        NSCharacterSet *stopCharacters = [NSCharacterSet characterSetWithCharactersInString:[NSString stringWithFormat:@"< \t\n\r%C%C%C%C", (unichar)0x0085, (unichar)0x000C, (unichar)0x2028, (unichar)0x2029]];
+        NSCharacterSet *newLineAndWhitespaceCharacters = [NSCharacterSet characterSetWithCharactersInString:[NSString stringWithFormat:@" \t\n\r%C%C%C%C", (unichar)0x0085, (unichar)0x000C, (unichar)0x2028, (unichar)0x2029]];
+        NSCharacterSet *tagNameCharacters = [NSCharacterSet characterSetWithCharactersInString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+        
+        // Scan and find all tags
+        NSMutableString *result = [[NSMutableString alloc] initWithCapacity:self.length];
+        NSScanner *scanner = [[NSScanner alloc] initWithString:self];
+        [scanner setCharactersToBeSkipped:nil];
+        [scanner setCaseSensitive:YES];
+        NSString *str = nil, *tagName = nil;
+        BOOL dontReplaceTagWithSpace = NO;
+        do {
+            
+            // Scan up to the start of a tag or whitespace
+            if ([scanner scanUpToCharactersFromSet:stopCharacters intoString:&str]) {
+                [result appendString:str];
+                str = nil; // reset
             }
-        }
-
-        // The following five are not in the 160+ range
-
-        // @"&amp;"
-        NSRange range = [self rangeOfString:@"&amp;"];
-        if (range.location != NSNotFound) {
-            [escaped replaceOccurrencesOfString:@"&amp;"
-                                     withString:[NSString stringWithFormat:@"%C", (unsigned short) 38]
-                                        options:NSLiteralSearch
-                                          range:NSMakeRange(0, [escaped length])];
-        }
-
-        // @"&lt;"
-        range = [self rangeOfString:@"&lt;"];
-        if (range.location != NSNotFound) {
-            [escaped replaceOccurrencesOfString:@"&lt;"
-                                     withString:[NSString stringWithFormat:@"%C", (unsigned short) 60]
-                                        options:NSLiteralSearch
-                                          range:NSMakeRange(0, [escaped length])];
-        }
-
-        // @"&gt;"
-        range = [self rangeOfString:@"&gt;"];
-        if (range.location != NSNotFound) {
-            [escaped replaceOccurrencesOfString:@"&gt;"
-                                     withString:[NSString stringWithFormat:@"%C", (unsigned short) 62]
-                                        options:NSLiteralSearch
-                                          range:NSMakeRange(0, [escaped length])];
-        }
-
-        // @"&apos;"
-        range = [self rangeOfString:@"&apos;"];
-        if (range.location != NSNotFound) {
-            [escaped replaceOccurrencesOfString:@"&apos;"
-                                     withString:[NSString stringWithFormat:@"%C", (unsigned short) 39]
-                                        options:NSLiteralSearch
-                                          range:NSMakeRange(0, [escaped length])];
-        }
-
-        // @"&quot;"
-        range = [self rangeOfString:@"&quot;"];
-        if (range.location != NSNotFound) {
-            [escaped replaceOccurrencesOfString:@"&quot;"
-                                     withString:[NSString stringWithFormat:@"%C", (unsigned short) 34]
-                                        options:NSLiteralSearch
-                                          range:NSMakeRange(0, [escaped length])];
-        }
-
-        // Decimal & Hex
-        NSRange start, finish, searchRange = NSMakeRange(0, [escaped length]);
-        i = 0;
-
-        while (i < [escaped length]) {
-            start = [escaped rangeOfString:@"&#"
-                                   options:NSCaseInsensitiveSearch
-                                     range:searchRange];
-
-            finish = [escaped rangeOfString:@";"
-                                    options:NSCaseInsensitiveSearch
-                                      range:searchRange];
-
-            if (start.location != NSNotFound && finish.location != NSNotFound &&
-                finish.location > start.location) {
-                NSRange entityRange = NSMakeRange(start.location, (finish.location - start.location) + 1);
-                NSString *entity = [escaped substringWithRange:entityRange];
-                NSString *value = [entity substringWithRange:NSMakeRange(2, [entity length] - 2)];
-
-                [escaped deleteCharactersInRange:entityRange];
-
-                if ([value hasPrefix:@"x"]) {
-                    unsigned tempInt = 0;
-                    NSScanner *scanner = [NSScanner scannerWithString:[value substringFromIndex:1]];
-                    [scanner scanHexInt:&tempInt];
-                    [escaped insertString:[NSString stringWithFormat:@"%C", (unsigned short) tempInt] atIndex:entityRange.location];
+            
+            // Check if we've stopped at a tag/comment or whitespace
+            if ([scanner scanString:@"<" intoString:NULL]) {
+                
+                // Stopped at a comment, script tag, or other tag
+                if ([scanner scanString:@"!--" intoString:NULL]) {
+                    
+                    // Comment
+                    [scanner scanUpToString:@"-->" intoString:NULL];
+                    [scanner scanString:@"-->" intoString:NULL];
+                    
+                } else if ([scanner scanString:@"script" intoString:NULL]) {
+                    
+                    // Script tag where things don't need escaping!
+                    [scanner scanUpToString:@"</script>" intoString:NULL];
+                    [scanner scanString:@"</script>" intoString:NULL];
+                    
                 } else {
-                    [escaped insertString:[NSString stringWithFormat:@"%C", (unsigned short) [value intValue]] atIndex:entityRange.location];
-                } i = start.location;
-            } else { i++; }
-            searchRange = NSMakeRange(i, [escaped length] - i);
-        }
-
-        return escaped;    // Note this is autoreleased
+                    
+                    // Tag - remove and replace with space unless it's
+                    // a closing inline tag then dont replace with a space
+                    if ([scanner scanString:@"/" intoString:NULL]) {
+                        
+                        // Closing tag - replace with space unless it's inline
+                        tagName = nil; dontReplaceTagWithSpace = NO;
+                        if ([scanner scanCharactersFromSet:tagNameCharacters intoString:&tagName]) {
+                            tagName = [tagName lowercaseString];
+                            dontReplaceTagWithSpace = ([tagName isEqualToString:@"a"] ||
+                                                       [tagName isEqualToString:@"b"] ||
+                                                       [tagName isEqualToString:@"i"] ||
+                                                       [tagName isEqualToString:@"q"] ||
+                                                       [tagName isEqualToString:@"span"] ||
+                                                       [tagName isEqualToString:@"em"] ||
+                                                       [tagName isEqualToString:@"strong"] ||
+                                                       [tagName isEqualToString:@"cite"] ||
+                                                       [tagName isEqualToString:@"abbr"] ||
+                                                       [tagName isEqualToString:@"acronym"] ||
+                                                       [tagName isEqualToString:@"label"]);
+                        }
+                        
+                        // Replace tag with string unless it was an inline
+                        if (!dontReplaceTagWithSpace && result.length > 0 && ![scanner isAtEnd]) [result appendString:@" "];
+                        
+                    }
+                    
+                    // Scan past tag
+                    [scanner scanUpToString:@">" intoString:NULL];
+                    [scanner scanString:@">" intoString:NULL];
+                    
+                }
+                
+            } else {
+                
+                // Stopped at whitespace - replace all whitespace and newlines with a space
+                if ([scanner scanCharactersFromSet:newLineAndWhitespaceCharacters intoString:NULL]) {
+                    if (result.length > 0 && ![scanner isAtEnd]) [result appendString:@" "]; // Dont append space to beginning or end of result
+                }
+                
+            }
+            
+        } while (![scanner isAtEnd]);
+        
+        // Cleanup
+        
+        // Decode HTML entities and return
+        NSString *retString = [result stringByDecodingHTMLEntities];
+        
+        // Return
+        return retString;
+        
     }
 }
 
-- (NSString *)ti_encodeHTMLCharacterEntities {
-    NSMutableString *encoded = [NSMutableString stringWithString:self];
+- (NSString *)stringByDecodingHTMLEntities {
+    // Can return self so create new string if we're a mutable string
+    return [NSString stringWithString:[self gtm_stringByUnescapingFromHTML]];
+}
 
-    // @"&amp;"
-    NSRange range = [self rangeOfString:@"&"];
-    if (range.location != NSNotFound) {
-        [encoded replaceOccurrencesOfString:@"&"
-                                 withString:@"&amp;"
-                                    options:NSLiteralSearch
-                                      range:NSMakeRange(0, [encoded length])];
+
+- (NSString *)stringByEncodingHTMLEntities {
+    // Can return self so create new string if we're a mutable string
+    return [NSString stringWithString:[self gtm_stringByEscapingForAsciiHTML]];
+}
+
+- (NSString *)stringByEncodingHTMLEntities:(BOOL)isUnicode {
+    // Can return self so create new string if we're a mutable string
+    return [NSString stringWithString:(isUnicode ? [self gtm_stringByEscapingForHTML] : [self gtm_stringByEscapingForAsciiHTML])];
+}
+
+- (NSString *)stringWithNewLinesAsBRs {
+	@autoreleasepool {
+        
+        // Strange New lines:
+        //	Next Line, U+0085
+        //	Form Feed, U+000C
+        //	Line Separator, U+2028
+        //	Paragraph Separator, U+2029
+        
+        // Scanner
+        NSScanner *scanner = [[NSScanner alloc] initWithString:self];
+        [scanner setCharactersToBeSkipped:nil];
+        NSMutableString *result = [[NSMutableString alloc] init];
+        NSString *temp;
+        NSCharacterSet *newLineCharacters = [NSCharacterSet characterSetWithCharactersInString:
+                                             [NSString stringWithFormat:@"\n\r%C%C%C%C", (unichar)0x0085, (unichar)0x000C, (unichar)0x2028, (unichar)0x2029]];
+        // Scan
+        do {
+            
+            // Get non new line characters
+            temp = nil;
+            [scanner scanUpToCharactersFromSet:newLineCharacters intoString:&temp];
+            if (temp) [result appendString:temp];
+            temp = nil;
+            
+            // Add <br /> s
+            if ([scanner scanString:@"\r\n" intoString:nil]) {
+                
+                // Combine \r\n into just 1 <br />
+                [result appendString:@"<br />"];
+                
+            } else if ([scanner scanCharactersFromSet:newLineCharacters intoString:&temp]) {
+                
+                // Scan other new line characters and add <br /> s
+                if (temp) {
+                    for (NSUInteger i = 0; i < temp.length; i++) {
+                        [result appendString:@"<br />"];
+                    }
+                }
+                
+            }
+            
+        } while (![scanner isAtEnd]);
+        
+        // Cleanup & return
+        NSString *retString = [NSString stringWithString:result];
+        
+        // Return
+        return retString;
+        
+	}
+}
+
+- (NSString *)stringByRemovingNewLinesAndWhitespace {
+	@autoreleasepool {
+        
+        // Strange New lines:
+        //	Next Line, U+0085
+        //	Form Feed, U+000C
+        //	Line Separator, U+2028
+        //	Paragraph Separator, U+2029
+        
+        // Scanner
+        NSScanner *scanner = [[NSScanner alloc] initWithString:self];
+        [scanner setCharactersToBeSkipped:nil];
+        NSMutableString *result = [[NSMutableString alloc] init];
+        NSString *temp;
+        NSCharacterSet *newLineAndWhitespaceCharacters = [NSCharacterSet characterSetWithCharactersInString:
+                                                          [NSString stringWithFormat:@" \t\n\r%C%C%C%C", (unichar)0x0085, (unichar)0x000C, (unichar)0x2028, (unichar)0x2029]];
+        // Scan
+        while (![scanner isAtEnd]) {
+            
+            // Get non new line or whitespace characters
+            temp = nil;
+            [scanner scanUpToCharactersFromSet:newLineAndWhitespaceCharacters intoString:&temp];
+            if (temp) [result appendString:temp];
+            
+            // Replace with a space
+            if ([scanner scanCharactersFromSet:newLineAndWhitespaceCharacters intoString:NULL]) {
+                if (result.length > 0 && ![scanner isAtEnd]) // Dont append space to beginning or end of result
+                    [result appendString:@" "];
+            }
+            
+        }
+        
+        // Cleanup
+        
+        // Return
+        NSString *retString = [NSString stringWithString:result];
+        
+        // Return
+        return retString;
+	}
+}
+
+- (NSString *)stringByLinkifyingURLs {
+    if (!NSClassFromString(@"NSRegularExpression")) return self;
+    @autoreleasepool {
+        NSString *pattern = @"(?<!=\")\\b((http|https):\\/\\/[\\w\\-_]+(\\.[\\w\\-_]+)+([\\w\\-\\.,@?^=%%&amp;:/~\\+#]*[\\w\\-\\@?^=%%&amp;/~\\+#])?)";
+        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:0 error:nil];
+        NSString *modifiedString = [regex stringByReplacingMatchesInString:self options:0 range:NSMakeRange(0, [self length])
+                                                              withTemplate:@"<a href=\"$1\" class=\"linkified\">$1</a>"];
+        return modifiedString;
     }
+}
 
-    // @"&lt;"
-    range = [self rangeOfString:@"<"];
-    if (range.location != NSNotFound) {
-        [encoded replaceOccurrencesOfString:@"<"
-                                 withString:@"&lt;"
-                                    options:NSLiteralSearch
-                                      range:NSMakeRange(0, [encoded length])];
-    }
-
-    // @"&gt;"
-    range = [self rangeOfString:@">"];
-    if (range.location != NSNotFound) {
-        [encoded replaceOccurrencesOfString:@">"
-                                 withString:@"&gt;"
-                                    options:NSLiteralSearch
-                                      range:NSMakeRange(0, [encoded length])];
-    }
-
-    return encoded;
+- (NSString *)stringByStrippingTags {
+	@autoreleasepool {
+        
+        // Find first & and short-cut if we can
+        NSUInteger ampIndex = [self rangeOfString:@"<" options:NSLiteralSearch].location;
+        if (ampIndex == NSNotFound) {
+            return [NSString stringWithString:self]; // return copy of string as no tags found
+        }
+        
+        // Scan and find all tags
+        NSScanner *scanner = [NSScanner scannerWithString:self];
+        [scanner setCharactersToBeSkipped:nil];
+        NSMutableSet *tags = [[NSMutableSet alloc] init];
+        NSString *tag;
+        do {
+            
+            // Scan up to <
+            tag = nil;
+            [scanner scanUpToString:@"<" intoString:NULL];
+            [scanner scanUpToString:@">" intoString:&tag];
+            
+            // Add to set
+            if (tag) {
+                NSString *t = [[NSString alloc] initWithFormat:@"%@>", tag];
+                [tags addObject:t];
+            }
+            
+        } while (![scanner isAtEnd]);
+        
+        // Strings
+        NSMutableString *result = [[NSMutableString alloc] initWithString:self];
+        NSString *finalString;
+        
+        // Replace tags
+        NSString *replacement;
+        for (NSString *t in tags) {
+            
+            // Replace tag with space unless it's an inline element
+            replacement = @" ";
+            if ([t isEqualToString:@"<a>"] ||
+                [t isEqualToString:@"</a>"] ||
+                [t isEqualToString:@"<span>"] ||
+                [t isEqualToString:@"</span>"] ||
+                [t isEqualToString:@"<strong>"] ||
+                [t isEqualToString:@"</strong>"] ||
+                [t isEqualToString:@"<em>"] ||
+                [t isEqualToString:@"</em>"]) {
+                replacement = @"";
+            }
+            
+            // Replace
+            [result replaceOccurrencesOfString:t
+                                    withString:replacement
+                                       options:NSLiteralSearch
+                                         range:NSMakeRange(0, result.length)];
+        }
+        
+        // Remove multi-spaces and line breaks
+        finalString = [result stringByRemovingNewLinesAndWhitespace];
+        
+        // Cleanup
+        
+        // Return
+        return finalString;
+        
+	}
 }
 
 @end

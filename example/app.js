@@ -7,10 +7,26 @@ var tabGroup = Titanium.UI.createTabGroup();
 var tihtml = require('com.kossotihtml');
 console.log('MODULE: '+ tihtml);
 
-var decoded = tihtml.decodeHTMLCharacterEntities('COOL &amp; THE GANG &Aacute; &lt; a acute');
+
+/*
+
+// Provides:
+
+tihtml.convertHTMLToPlainText(string)
+tihtml.stringByDecodingHTMLEntities(string)
+tihtml.stringByEncodingHTMLEntities(string)
+tihtml.stringByEncodingHTMLEntitiesUnicode(string)
+tihtml.stringWithNewLinesAsBRs(string)
+tihtml.stringByRemovingNewLinesAndWhitespace(string)
+
+returns string
+
+*/
+
+var decoded = tihtml.stringByDecodingHTMLEntities('COOL &amp; THE GANG &Aacute; &lt; a acute');
 console.log(decoded);
 
-var encoded = tihtml.encodeHTMLCharacterEntities('warm > cool & les gangs <div> double quote " double quote - single : \' Æ ô ');
+var encoded = tihtml.stringByEncodingHTMLEntities('warm > cool & les gangs <div> double quote " double quote - single : \' Æ ô ');
 console.log(encoded);
 
 

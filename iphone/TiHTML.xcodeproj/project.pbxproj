@@ -26,8 +26,10 @@
 		24DD6CFA1134B3F500162E58 /* ComKossotihtmlModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* ComKossotihtmlModule.m */; };
 		24DE9E1111C5FE74003F90F6 /* ComKossotihtmlModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* ComKossotihtmlModuleAssets.h */; };
 		24DE9E1211C5FE74003F90F6 /* ComKossotihtmlModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* ComKossotihtmlModuleAssets.m */; };
-		6A52E7FC1D4CBF9B009AAAD6 /* NSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A52E7FA1D4CBF9B009AAAD6 /* NSString+HTML.h */; };
-		6A52E7FD1D4CBF9B009AAAD6 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A52E7FB1D4CBF9B009AAAD6 /* NSString+HTML.m */; };
+		6AF4557E1D4CF6CB0075FB01 /* GTMNSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF4557B1D4CF6CB0075FB01 /* GTMNSString+HTML.h */; };
+		6AF4557F1D4CF6CB0075FB01 /* NSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF4557C1D4CF6CB0075FB01 /* NSString+HTML.h */; };
+		6AF455801D4CF6CB0075FB01 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF4557D1D4CF6CB0075FB01 /* NSString+HTML.m */; };
+		6AF455821D4CF8AC0075FB01 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF455811D4CF8AC0075FB01 /* GTMNSString+HTML.m */; };
 		AA747D9F0F9514B9006C5449 /* ComKossotihtml_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* ComKossotihtml_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -48,8 +50,10 @@
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
 		24DE9E0F11C5FE74003F90F6 /* ComKossotihtmlModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComKossotihtmlModuleAssets.h; path = Classes/ComKossotihtmlModuleAssets.h; sourceTree = "<group>"; };
 		24DE9E1011C5FE74003F90F6 /* ComKossotihtmlModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComKossotihtmlModuleAssets.m; path = Classes/ComKossotihtmlModuleAssets.m; sourceTree = "<group>"; };
-		6A52E7FA1D4CBF9B009AAAD6 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
-		6A52E7FB1D4CBF9B009AAAD6 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		6AF4557B1D4CF6CB0075FB01 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		6AF4557C1D4CF6CB0075FB01 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		6AF4557D1D4CF6CB0075FB01 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		6AF455811D4CF8AC0075FB01 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* ComKossotihtml_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComKossotihtml_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libComKossotihtml.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libComKossotihtml.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,8 +101,10 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				6A52E7FA1D4CBF9B009AAAD6 /* NSString+HTML.h */,
-				6A52E7FB1D4CBF9B009AAAD6 /* NSString+HTML.m */,
+				6AF455811D4CF8AC0075FB01 /* GTMNSString+HTML.m */,
+				6AF4557B1D4CF6CB0075FB01 /* GTMNSString+HTML.h */,
+				6AF4557C1D4CF6CB0075FB01 /* NSString+HTML.h */,
+				6AF4557D1D4CF6CB0075FB01 /* NSString+HTML.m */,
 				24DE9E0F11C5FE74003F90F6 /* ComKossotihtmlModuleAssets.h */,
 				24DE9E1011C5FE74003F90F6 /* ComKossotihtmlModuleAssets.m */,
 				24DD6CF71134B3F500162E58 /* ComKossotihtmlModule.h */,
@@ -123,8 +129,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AF4557E1D4CF6CB0075FB01 /* GTMNSString+HTML.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* ComKossotihtml_Prefix.pch in Headers */,
-				6A52E7FC1D4CBF9B009AAAD6 /* NSString+HTML.h in Headers */,
+				6AF4557F1D4CF6CB0075FB01 /* NSString+HTML.h in Headers */,
 				24DD6CF91134B3F500162E58 /* ComKossotihtmlModule.h in Headers */,
 				24DE9E1111C5FE74003F90F6 /* ComKossotihtmlModuleAssets.h in Headers */,
 			);
@@ -201,7 +208,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				24DD6CFA1134B3F500162E58 /* ComKossotihtmlModule.m in Sources */,
-				6A52E7FD1D4CBF9B009AAAD6 /* NSString+HTML.m in Sources */,
+				6AF455821D4CF8AC0075FB01 /* GTMNSString+HTML.m in Sources */,
+				6AF455801D4CF6CB0075FB01 /* NSString+HTML.m in Sources */,
 				24DE9E1211C5FE74003F90F6 /* ComKossotihtmlModuleAssets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

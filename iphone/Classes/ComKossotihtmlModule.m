@@ -88,18 +88,69 @@
 #pragma Public APIs
 
 
--(id)decodeHTMLCharacterEntities:(id)value
+/*
+
+ // see:  http://stackoverflow.com/a/2843454/600628
+ 
+    NSString+HTML category 
+ 
+    // Strips HTML tags & comments, removes extra whitespace and decodes HTML character entities.
+     - (NSString *)stringByConvertingHTMLToPlainText;
+     
+     // Decode all HTML entities using GTM.
+     - (NSString *)stringByDecodingHTMLEntities;
+     
+     // Encode all HTML entities using GTM.
+     - (NSString *)stringByEncodingHTMLEntities;
+     
+     // Minimal unicode encoding will only cover characters from table
+     // A.2.2 of http://www.w3.org/TR/xhtml1/dtds.html#a_dtd_Special_characters
+     // which is what you want for a unicode encoded webpage.
+     - (NSString *)stringByEncodingHTMLEntities:(BOOL)isUnicode;
+     
+     // Replace newlines with <br /> tags.
+     - (NSString *)stringWithNewLinesAsBRs;
+     
+     // Remove newlines and white space from string.
+     - (NSString *)stringByRemovingNewLinesAndWhitespace;
+     
+ 
+*/
+
+-(id)convertHTMLToPlainText:(id)value
 {
-    return [[TiUtils stringValue:value] ti_decodeHTMLCharacterEntities];
+    NSString *converted = [[TiUtils stringValue:[value objectAtIndex:0]] stringByConvertingHTMLToPlainText];
+    return converted;
 }
 
--(id)encodeHTMLCharacterEntities:(id)value
+-(id)stringByDecodingHTMLEntities:(id)value
 {
-    return [[TiUtils stringValue:value] ti_encodeHTMLCharacterEntities];
+    NSString *decoded = [[TiUtils stringValue:[value objectAtIndex:0]] stringByDecodingHTMLEntities];
+    return decoded;
 }
 
+-(id)stringByEncodingHTMLEntities:(id)value
+{
+    NSString *encoded = [[TiUtils stringValue:[value objectAtIndex:0]] stringByEncodingHTMLEntities];
+    return encoded;
+}
 
+-(id)stringByEncodingHTMLEntitiesUnicode:(id)value
+{
+    NSString *encoded = [[TiUtils stringValue:[value objectAtIndex:0]] stringByEncodingHTMLEntities:YES];
+    return encoded;
+}
 
+-(id)stringWithNewLinesAsBRs:(id)value
+{
+    NSString *encoded = [[TiUtils stringValue:[value objectAtIndex:0]] stringWithNewLinesAsBRs];
+    return encoded;
+}
+-(id)stringByRemovingNewLinesAndWhitespace:(id)value
+{
+    NSString *encoded = [[TiUtils stringValue:[value objectAtIndex:0]] stringByRemovingNewLinesAndWhitespace];
+    return encoded;
+}
 
 
 
