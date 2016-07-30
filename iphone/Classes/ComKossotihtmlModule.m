@@ -5,12 +5,12 @@
  * Copyright (c) 2016 . All rights reserved.
  */
 
-#import "ComKossotihtmlModule.h"
+#import "ComKossoTihtmlModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
 #import "TiUtils.h"
 
-@implementation ComKossotihtmlModule
+@implementation ComKossoTihtmlModule
 
 #pragma mark Internal
 
@@ -23,7 +23,7 @@
 // this is generated for your module, please do not change it
 -(NSString*)moduleId
 {
-	return @"com.kossotihtml";
+	return @"com.kosso.tihtml";
 }
 
 #pragma mark Lifecycle

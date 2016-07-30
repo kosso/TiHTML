@@ -5,7 +5,7 @@ Encode/decode HTML special characters and entities and more...
 Implementation of https://github.com/mwaterfall/MWFeedParser/blob/master/Classes/NSString%2BHTML.m as an Appcelerator Titanium iOS module. 
 
 ```
-var tihtml = require('com.kossotihtml');
+var tihtml = require('com.kosso.tihtml');
 console.log('MODULE: '+ tihtml);
 /*
 // Provides:

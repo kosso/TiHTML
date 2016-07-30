@@ -22,10 +22,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		24DD6CF91134B3F500162E58 /* ComKossotihtmlModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* ComKossotihtmlModule.h */; };
-		24DD6CFA1134B3F500162E58 /* ComKossotihtmlModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* ComKossotihtmlModule.m */; };
-		24DE9E1111C5FE74003F90F6 /* ComKossotihtmlModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* ComKossotihtmlModuleAssets.h */; };
-		24DE9E1211C5FE74003F90F6 /* ComKossotihtmlModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* ComKossotihtmlModuleAssets.m */; };
+		6A5D1EA91D4D0B6A008B9592 /* ComKossoTihtmlModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5D1EA51D4D0B6A008B9592 /* ComKossoTihtmlModule.h */; };
+		6A5D1EAA1D4D0B6A008B9592 /* ComKossoTihtmlModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D1EA61D4D0B6A008B9592 /* ComKossoTihtmlModule.m */; };
+		6A5D1EAB1D4D0B6A008B9592 /* ComKossoTihtmlModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A5D1EA71D4D0B6A008B9592 /* ComKossoTihtmlModuleAssets.h */; };
+		6A5D1EAC1D4D0B6A008B9592 /* ComKossoTihtmlModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5D1EA81D4D0B6A008B9592 /* ComKossoTihtmlModuleAssets.m */; };
 		6AF4557E1D4CF6CB0075FB01 /* GTMNSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF4557B1D4CF6CB0075FB01 /* GTMNSString+HTML.h */; };
 		6AF4557F1D4CF6CB0075FB01 /* NSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF4557C1D4CF6CB0075FB01 /* NSString+HTML.h */; };
 		6AF455801D4CF6CB0075FB01 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF4557D1D4CF6CB0075FB01 /* NSString+HTML.m */; };
@@ -45,11 +45,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		24DD6CF71134B3F500162E58 /* ComKossotihtmlModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComKossotihtmlModule.h; path = Classes/ComKossotihtmlModule.h; sourceTree = "<group>"; };
-		24DD6CF81134B3F500162E58 /* ComKossotihtmlModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComKossotihtmlModule.m; path = Classes/ComKossotihtmlModule.m; sourceTree = "<group>"; };
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
-		24DE9E0F11C5FE74003F90F6 /* ComKossotihtmlModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComKossotihtmlModuleAssets.h; path = Classes/ComKossotihtmlModuleAssets.h; sourceTree = "<group>"; };
-		24DE9E1011C5FE74003F90F6 /* ComKossotihtmlModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComKossotihtmlModuleAssets.m; path = Classes/ComKossotihtmlModuleAssets.m; sourceTree = "<group>"; };
+		6A5D1EA51D4D0B6A008B9592 /* ComKossoTihtmlModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComKossoTihtmlModule.h; path = Classes/ComKossoTihtmlModule.h; sourceTree = "<group>"; };
+		6A5D1EA61D4D0B6A008B9592 /* ComKossoTihtmlModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComKossoTihtmlModule.m; path = Classes/ComKossoTihtmlModule.m; sourceTree = "<group>"; };
+		6A5D1EA71D4D0B6A008B9592 /* ComKossoTihtmlModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComKossoTihtmlModuleAssets.h; path = Classes/ComKossoTihtmlModuleAssets.h; sourceTree = "<group>"; };
+		6A5D1EA81D4D0B6A008B9592 /* ComKossoTihtmlModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComKossoTihtmlModuleAssets.m; path = Classes/ComKossoTihtmlModuleAssets.m; sourceTree = "<group>"; };
 		6AF4557B1D4CF6CB0075FB01 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
 		6AF4557C1D4CF6CB0075FB01 /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		6AF4557D1D4CF6CB0075FB01 /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
@@ -101,14 +101,14 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6A5D1EA51D4D0B6A008B9592 /* ComKossoTihtmlModule.h */,
+				6A5D1EA61D4D0B6A008B9592 /* ComKossoTihtmlModule.m */,
+				6A5D1EA71D4D0B6A008B9592 /* ComKossoTihtmlModuleAssets.h */,
+				6A5D1EA81D4D0B6A008B9592 /* ComKossoTihtmlModuleAssets.m */,
 				6AF455811D4CF8AC0075FB01 /* GTMNSString+HTML.m */,
 				6AF4557B1D4CF6CB0075FB01 /* GTMNSString+HTML.h */,
 				6AF4557C1D4CF6CB0075FB01 /* NSString+HTML.h */,
 				6AF4557D1D4CF6CB0075FB01 /* NSString+HTML.m */,
-				24DE9E0F11C5FE74003F90F6 /* ComKossotihtmlModuleAssets.h */,
-				24DE9E1011C5FE74003F90F6 /* ComKossotihtmlModuleAssets.m */,
-				24DD6CF71134B3F500162E58 /* ComKossotihtmlModule.h */,
-				24DD6CF81134B3F500162E58 /* ComKossotihtmlModule.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -130,10 +130,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6AF4557E1D4CF6CB0075FB01 /* GTMNSString+HTML.h in Headers */,
+				6A5D1EAB1D4D0B6A008B9592 /* ComKossoTihtmlModuleAssets.h in Headers */,
 				AA747D9F0F9514B9006C5449 /* ComKossotihtml_Prefix.pch in Headers */,
+				6A5D1EA91D4D0B6A008B9592 /* ComKossoTihtmlModule.h in Headers */,
 				6AF4557F1D4CF6CB0075FB01 /* NSString+HTML.h in Headers */,
-				24DD6CF91134B3F500162E58 /* ComKossotihtmlModule.h in Headers */,
-				24DE9E1111C5FE74003F90F6 /* ComKossotihtmlModuleAssets.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,10 +207,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24DD6CFA1134B3F500162E58 /* ComKossotihtmlModule.m in Sources */,
+				6A5D1EAC1D4D0B6A008B9592 /* ComKossoTihtmlModuleAssets.m in Sources */,
+				6A5D1EAA1D4D0B6A008B9592 /* ComKossoTihtmlModule.m in Sources */,
 				6AF455821D4CF8AC0075FB01 /* GTMNSString+HTML.m in Sources */,
 				6AF455801D4CF6CB0075FB01 /* NSString+HTML.m in Sources */,
-				24DE9E1211C5FE74003F90F6 /* ComKossotihtmlModuleAssets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

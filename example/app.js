@@ -4,7 +4,7 @@ Titanium.UI.setBackgroundColor('#000');
 // create tab group
 var tabGroup = Titanium.UI.createTabGroup();
 
-var tihtml = require('com.kossotihtml');
+var tihtml = require('com.kosso.tihtml');
 console.log('MODULE: '+ tihtml);
 
 

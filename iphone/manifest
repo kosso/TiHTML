@@ -12,7 +12,7 @@ copyright: 2016
 
 # these should not be edited
 name: TiHTML
-moduleid: com.kossotihtml
+moduleid: com.kosso.tihtml
 guid: 61ceb6d1-0d57-4b0a-8078-1450dbb780e6
 platform: iphone
 minsdk: 5.2.2.GA
